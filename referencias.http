@@ -1,0 +1,109 @@
+### USUÁRIOS
+
+# Criar usuário
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "nome": "João",
+  "senha": "senha123",
+  "email": "joao@email.com",
+  "telefone": "11999999999"
+}
+
+###
+
+# Listar usuários
+GET http://localhost:3000/usuarios
+
+###
+
+# Atualizar usuário (troque o id pelo desejado)
+PUT http://localhost:3000/usuarios/1
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "senha": "novaSenha",
+  "email": "joaosilva@email.com",
+  "telefone": "11888888888"
+}
+
+###
+
+# Deletar usuário
+DELETE http://localhost:3000/usuarios/1
+
+###
+
+### CATEGORIAS
+
+# Criar categoria
+POST http://localhost:3000/categorias
+Content-Type: application/json
+
+{
+  "nome": "Sobremesas"
+}
+
+###
+
+# Listar categorias
+GET http://localhost:3000/categorias
+
+###
+
+# Atualizar categoria
+PUT http://localhost:3000/categorias/1
+Content-Type: application/json
+
+{
+  "nome": "Doces"
+}
+
+###
+
+# Deletar categoria
+DELETE http://localhost:3000/categorias/1
+
+###
+
+### RECEITAS
+
+# Criar receita (troque usuario_id e categoria_id pelos existentes)
+POST http://localhost:3000/receitas
+Content-Type: application/json
+
+{
+  "nome": "Bolo de Chocolate",
+  "modo_preparo": "Misture tudo e asse.",
+  "ingredientes": "Farinha, chocolate, ovos, açúcar",
+  "usuario_id": 1,
+  "categoria_id": 1
+}
+
+###
+
+# Listar receitas
+GET http://localhost:3000/receitas
+
+###
+
+# Atualizar receita
+PUT http://localhost:3000/receitas/1
+Content-Type: application/json
+
+{
+  "nome": "Bolo de Cenoura",
+  "modo_preparo": "Misture tudo e asse.",
+  "ingredientes": "Farinha, cenoura, ovos, açúcar",
+  "usuario_id": 1,
+  "categoria_id": 1
+}
+
+###
+
+# Deletar receita
+DELETE http://localhost:3000/receitas/1
+
+###
