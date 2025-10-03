@@ -14,6 +14,8 @@ const pool = new Pool({
 const server = Fastify();
 
 // CRUD USUÁRIOS
+
+//CRIAR USUARIO
 server.post('/usuarios', async (req, reply) => {
   const { nome, senha, email, telefone } = req.body;
   try {
@@ -22,6 +24,23 @@ server.post('/usuarios', async (req, reply) => {
       [nome, senha, email, telefone]
     );
     reply.send(result.rows[0]);
+  } catch (err) {
+    reply.status(500).send({ error: err.message });
+  }
+});
+
+// LOGIN
+server.post('/login', async (req, reply) => {
+  const { email, senha } = req.body;
+  try {
+    const result = await pool.query(
+      'SELECT * FROM usuarios WHERE email = $1 AND senha = $2',
+      [email, senha]
+    );
+    if (result.rows.length === 0) {
+      return reply.status(401).send({ error: 'Email ou senha inválidos' });
+    }
+    reply.send({ message: 'Login realizado com sucesso', usuario: result.rows[0] });
   } catch (err) {
     reply.status(500).send({ error: err.message });
   }
