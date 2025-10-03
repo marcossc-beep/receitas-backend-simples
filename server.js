@@ -1,4 +1,6 @@
+
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import pkg from 'pg';
 
 const { Pool } = pkg;
@@ -11,7 +13,13 @@ const pool = new Pool({
   port: 5433,
 });
 
+
 const server = Fastify();
+// Habilita CORS para todas as origens (ajuste origin se quiser restringir)
+await server.register(cors, {
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+});
 
 // CRUD USUÁRIOS
 
@@ -173,4 +181,4 @@ server.delete('/receitas/:id', async (req, reply) => {
   }
 });
 
-server.listen({ port: 3000 });
+server.listen({ port: 3000, host: '0.0.0.0'});
