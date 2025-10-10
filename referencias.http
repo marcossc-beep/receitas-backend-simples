@@ -84,8 +84,18 @@ Content-Type: application/json
 
 ###
 
-# Listar receitas
+
+# Listar receitas (sem paginação)
 GET http://localhost:3000/receitas
+
+# Listar receitas (com paginação, página 1, 10 por página)
+GET http://localhost:3000/receitas?page=1&limit=10
+
+# Listar receitas (com paginação, página 2, 5 por página)
+GET http://localhost:3000/receitas?page=2&limit=5
+
+# Listar receitas ordenadas por data_criacao desc, página 1, 5 por página
+GET http://localhost:3000/receitas?sort=data_criacao&order=desc&page=1&limit=5
 
 ###
 
