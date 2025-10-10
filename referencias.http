@@ -14,7 +14,7 @@ Content-Type: application/json
 ###
 
 # Listar usuários
-GET http://localhost:3000/usuarios
+GET http://10.23.18.78:3000/usuarios
 
 ###
 

@@ -149,8 +149,20 @@ server.post('/receitas', async (req, reply) => {
 });
 
 server.get('/receitas', async (req, reply) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+
+  // Colunas permitidas para ordenação
+  const allowedOrder = ['id', 'nome', 'data_criacao', 'publicada', 'tempo_preparo_minutos', 'porcoes', 'usuario_id', 'categoria_id'];
+  const sort = allowedOrder.includes(req.query.sort) ? req.query.sort : 'id';
+  const order = req.query.order === 'desc' ? 'DESC' : 'ASC';
+
   try {
-    const result = await pool.query('SELECT * FROM receitas');
+    const result = await pool.query(
+      `SELECT * FROM receitas ORDER BY ${sort} ${order} LIMIT $1 OFFSET $2`,
+      [limit, offset]
+    );
     reply.send(result.rows);
   } catch (err) {
     reply.status(500).send({ error: err.message });
